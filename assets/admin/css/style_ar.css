@@ -1,0 +1,44 @@
+body{
+	direction: rtl;
+}
+@media only screen and (min-width: 992px) and (max-width: 1440px){
+	.page-container {
+		padding-right: 230px;
+		padding-left: 0px;
+	}
+}
+.product_list li , .purchase_list li{
+	padding: 10px;
+	font-size: 14px;
+	font-weight: bolder;
+	border-bottom: 1px solid #eee;
+	display: block;
+	cursor: pointer;
+	color: #000;
+}
+.plus_div {
+    padding-left: 40px !important;
+    padding-right: 0 !important;
+}
+.plus_btn{
+	left: 0;
+	right: auto;
+	border-radius: 5px 0px 0px  5px;
+}
+.card-body{
+	text-align: right;
+}
+.home-ul li {
+    float: right;
+}
+.mfp-iframe{
+	direction: rtl;
+}
+.table {
+    color: #53535f;
+    direction: rtl;
+    text-align: right;
+}
+.container{
+	text-align: right;
+}
