@@ -12,7 +12,14 @@ use App\Models\ProductMovement;
 class StockController extends Controller
 {
     public  function search()  {
-        $allData  =  Stock::where('store_id',app('request')->input('store_id'))->where('amount','>',0)
+        $allData  =  Stock::OrderBy('amount','desc')->where(function($q){
+                                if (auth()->user()->type == 1) {
+                                    $q->where('store_id',auth()->user()->store_id);
+                                }else{
+                                    $q->where('store_id',app('request')->input('store_id'));
+                                }
+                            })
+                          ->where('amount','>',0)
                           ->whereHas('product',function($query){
                              $query->where('name','LIKE','%'.app('request')->input('name').'%');   
                              $query->orWhere('name_en','LIKE','%'.app('request')->input('name').'%');   

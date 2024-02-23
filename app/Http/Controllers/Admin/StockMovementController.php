@@ -22,7 +22,12 @@ class StockMovementController extends Controller
                     ;
     }
     public function index()  {
-        $allData = StockMovement::OrderBy('id','desc')->paginate(30);
+        $allData = StockMovement::OrderBy('id','desc')->where(function($q){
+                    if (auth()->user()->type == 1 ) {
+                        $q->where('store_id',auth()->user()->store_id);
+                        $q->orWhere('store_to',auth()->user()->store_id);
+                    }
+                  })->paginate(30);
         return  view('admin.stocks.stock_movements')
                     ->with('allData',$allData)
                     ->with('title',trans('home.Stock Movements'));

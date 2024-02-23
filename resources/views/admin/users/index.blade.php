@@ -11,9 +11,14 @@
     </div>
 	<div class="card">
 		<div class="card-body">
+			
 			<div class="panel-heading ">
-			       <a href="{{ URL::to('admin/users/add') }}"
-				    class="btn-xs btn btn-primary pull-right">{{ trans('home.Add New') }}</a>
+			       <div class="row">
+					<div class="col-md-12">
+					<a href="{{ URL::to('admin/users/add') }}"
+				    class="btn-xs btn btn-info pull-right">{{ trans('home.Add New') }}</a>
+					</div>
+				   </div>
 			        {{ Form::open(['url'=>'admin/users','method'=>'get','class'=>'search-form']) }}
 			        <div class="row">
 			            <div class="col-sm-5">

@@ -138,27 +138,27 @@
 			   if(name.length > 2){
 						$.get('{{ URL::to("admin/products/search") }}',{name:name},function(data){
 							var products  =  data.data;
-							if (data.count == 1) {
-                                var  item = products[0];
-								var  name =  item.title;
-								var  id   =  item.id;
-								ids.push(id);
-								var  text =  '<tr>';
-								text      = text+'<td> <input type="hidden" name="product_id[]" value="'+id+'" >'+name+'</td>' ;
-								text      = text+'<td><input type="hidden" name="amount[]" value="0">0</td>';
-								text      = text+'<td><input type="number" class="form-control" min="1" name="recived_amount[]" value="1" ></td>' ;
-								text      = text+'<td> <a class="remove_item"> X </a> </td></tr>' ;
-								$('#products_row').append(text);
-								$("#product_search").addClass('success');
-								setTimeout(() => {
-									$("#product_search").removeClass('success');
-								}, 1000);
+							// if (data.count == 1) {
+                            //     var  item = products[0];
+							// 	var  name =  item.title;
+							// 	var  id   =  item.id;
+							// 	ids.push(id);
+							// 	var  text =  '<tr>';
+							// 	text      = text+'<td> <input type="hidden" name="product_id[]" value="'+id+'" >'+name+'</td>' ;
+							// 	text      = text+'<td><input type="hidden" name="amount[]" value="0">0</td>';
+							// 	text      = text+'<td><input type="number" class="form-control" min="1" name="recived_amount[]" value="1" ></td>' ;
+							// 	text      = text+'<td> <a class="remove_item"> X </a> </td></tr>' ;
+							// 	$('#products_row').append(text);
+							// 	$("#product_search").addClass('success');
+							// 	setTimeout(() => {
+							// 		$("#product_search").removeClass('success');
+							// 	}, 1000);
                                
-							}else{
+							// }else{
 								$.each(products,function(index,item) {
 									$('.product_list').append('<li  data-id="'+item.id+'" data-name="'+item.title+'">'+item.title+'</li>')
 								})
-							}
+							// }
 							
 					   })
 			   }

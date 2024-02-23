@@ -51,7 +51,7 @@
                                         <input type="hidden" name="product_id[]" value="{{ $item->product_id }}">
                                     </td>
                                     <td>
-                                        {{ Form::number('quantity[]',$item->amount,['class'=>'form-control','min'=>0,'max'=>$item->max]) }}
+                                        {{ Form::number('quantity[]',$item->amount,['class'=>'form-control','min'=>0]) }}
                                     </td>
                                 </tr>
                                 @endforeach

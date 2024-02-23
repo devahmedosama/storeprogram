@@ -91,7 +91,11 @@ class ReciveController extends Controller
                     ->with('yes',trans('home.Done Successfully'));
     }
     public function index()  {
-        $allData  =  Recive::OrderBy('id','desc')->paginate(30);
+        $allData  =  Recive::OrderBy('id','desc')->where(function($q){
+                            if (auth()->user()->type == 1) {
+                                $q->where('store_id',auth()->user()->store_id);
+                            }
+                        })->paginate(30);
         foreach ($allData as $key => $data) {
             $data->amount = $data->items()->sum('amount');
             $data->recived_amount =  $data->items()->sum('recived_amount');

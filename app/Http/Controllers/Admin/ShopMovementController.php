@@ -65,7 +65,11 @@ class ShopMovementController extends Controller
                    ->with('yes',trans('home.Done Successfully'));
 	}
     public function index()  {
-        $allData = ShopMovement::OrderBy('id','desc')->paginate(30);
+        $allData = ShopMovement::OrderBy('id','desc')->where(function($q){
+            if (auth()->user()->type == 1 ) {
+                $q->where('store_id',auth()->user()->store_id);
+            }
+          })->paginate(30);
         return view('admin.shop_movements.index')
                     ->with('allData',$allData)
                     ->with('title',trans('home.Shop Movements'));
@@ -122,7 +126,7 @@ class ShopMovementController extends Controller
              Stock::update_stock($product_id,$store_id,$amount);
         }
         \DB::commit();
-        return redirect('admin/sales-bills')
+        return redirect('admin/shop-movements')
                  ->with('yes',trans('home.Done Successfully'));
     }
 }

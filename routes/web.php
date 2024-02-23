@@ -18,19 +18,79 @@ Route::get('login',[Admin\HomeController::class,'login'])->name('login');
 Route::post('login',[Admin\HomeController::class,'postLogin']);
 Route::get('logout',[Admin\HomeController::class,'logout']);
 Route::get('/',[Admin\HomeController::class,'login']);
-Route::group(['prefix'=>'admin','middleware'=>['auth','set_lang']],function(){
-
-
+Route::group(['prefix'=>'admin','middleware'=>['set_lang','auth']],function(){
    Route::get('/',[Admin\HomeController::class,'index']);
    Route::get('profile',[Admin\HomeController::class,'profile']);
    Route::post('profile',[Admin\HomeController::class,'edit']);
+   Route::get('products/search',[Admin\ProductController::class,'search']);
+   Route::post('products/import',[Admin\ProductController::class,'post_import']);
+});
+Route::group(['prefix'=>'admin','middleware'=>['set_lang','store_keeper']],function(){
+
+   //purchases
+   Route::get('purchases',[Admin\PurchaseController::class,'index']);
+   Route::get('purchases/search',[Admin\PurchaseController::class,'search']);
+   
+   
+
+   //recive purchase
+   Route::get('recives',[Admin\ReciveController::class,'index']);
+   Route::get('recives/view/{id}',[Admin\ReciveController::class,'show']);
+   Route::get('recives/add',[Admin\ReciveController::class,'add']);
+   Route::post('recives/add',[Admin\ReciveController::class,'postAdd']);
+   Route::get('recives/edit/{id}',[Admin\ReciveController::class,'edit']);
+   Route::post('recives/edit/{id}',[Admin\ReciveController::class,'postEdit']);
+   Route::get('purchases/recive/{id}',[Admin\ReciveController::class,'recive']);
+   Route::post('purchases/recive/{id}',[Admin\ReciveController::class,'postRecive']);
+
+   //stock-movements 
+   Route::get('stock-movements/move',[Admin\StockMovementController::class,'move']);
+   Route::get('stock-movements',[Admin\StockMovementController::class,'index']);
+   Route::get('stock/search',[Admin\StockController::class,'search']);
+   Route::get('stocks',[Admin\StockController::class,'index']);
+   Route::get('stocks/view/{id}',[Admin\StockController::class,'view']);
+   Route::post('stock/move',[Admin\StockController::class,'postMove']);
+   Route::get('stock-movements/view/{id}',[Admin\StockMovementController::class,'show']);
+
+   //sales bills
+   Route::get('sales-bills',[Admin\SalesBillController::class,'index']);
+   Route::get('sales-bills/view/{id}',[Admin\SalesBillController::class,'show']);
+   Route::get('sales-bills/add',[Admin\SalesBillController::class,'add']);
+   Route::post('sales-bills/add',[Admin\SalesBillController::class,'postAdd']);
+   Route::get('sales-bills/edit/{id}',[Admin\SalesBillController::class,'edit']);
+   Route::post('sales-bills/edit/{id}',[Admin\SalesBillController::class,'postEdit']);
+   
+   //shop-movements 
+   Route::get('shop-movements/add',[Admin\ShopMovementController::class,'move']);
+   Route::post('shop-movements/add',[Admin\ShopMovementController::class,'postAdd']);
+   Route::get('shop-movements',[Admin\ShopMovementController::class,'index']);
+   Route::get('shop-movements/view/{id}',[Admin\ShopMovementController::class,'show']);
+   Route::get('shop-movements/edit/{id}',[Admin\ShopMovementController::class,'edit']);
+   Route::post('shop-movements/edit/{id}',[Admin\ShopMovementController::class,'postEdit']);
+
+   //add options 
+   Route::post('supliers/add',[Admin\SuplierController::class,'postAdd']);
+   Route::post('products/add',[Admin\ProductController::class,'postAdd']);
+   Route::post('sales-men/add',[Admin\SalesManController::class,'postAdd']);
+});
+Route::group(['prefix'=>'admin','middleware'=>['admin','set_lang']],function(){
+
+  
    Route::get('settings',[Admin\SettingController::class,'index']);
    Route::post('settings',[Admin\SettingController::class,'edit']);
+
+   //orders
+   Route::get('view-pdf/{id}',[Admin\PurchaseController::class,'view_pdf']);
+   Route::get('purchases/view/{id}',[Admin\PurchaseController::class,'show']);
+   Route::get('purchases/add',[Admin\PurchaseController::class,'add']);
+   Route::get('purchases/delete/{id}',[Admin\PurchaseController::class,'delete']);
+   Route::post('purchases/add',[Admin\PurchaseController::class,'postAdd']);
+   Route::post('send/email/{id}',[Admin\PurchaseController::class,'send_email']);
 
     //supliers
    Route::get('supliers',[Admin\SuplierController::class,'index']);
    Route::get('supliers/add',[Admin\SuplierController::class,'add']);
-   Route::post('supliers/add',[Admin\SuplierController::class,'postAdd']);
+   
    Route::get('supliers/delete/{id}',[Admin\SuplierController::class,'delete']);
    Route::get('supliers/edit/{id}',[Admin\SuplierController::class,'edit']);
    Route::post('supliers/edit/{id}',[Admin\SuplierController::class,'postEdit']);
@@ -41,12 +101,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','set_lang']],function(){
    Route::post('users/add',[Admin\UserController::class,'postAdd']);
    Route::get('users/activate/{id}',[Admin\UserController::class,'activate']);
    Route::get('users/edit/{id}',[Admin\UserController::class,'edit']);
+   Route::get('users/activate/{id}',[Admin\UserController::class,'activate']);
    Route::post('users/edit/{id}',[Admin\UserController::class,'postEdit']);
 
    // sales ments
    Route::get('sales-men',[Admin\SalesManController::class,'index']);
    Route::get('sales-men/add',[Admin\SalesManController::class,'add']);
-   Route::post('sales-men/add',[Admin\SalesManController::class,'postAdd']);
    Route::get('sales-men/delete/{id}',[Admin\SalesManController::class,'delete']);
    Route::get('sales-men/edit/{id}',[Admin\SalesManController::class,'edit']);
    Route::post('sales-men/edit/{id}',[Admin\SalesManController::class,'postEdit']);
@@ -54,9 +114,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','set_lang']],function(){
     //products
     Route::get('products',[Admin\ProductController::class,'index']);
     Route::get('products/add',[Admin\ProductController::class,'add']);
-    Route::get('products/search',[Admin\ProductController::class,'search']);
-    Route::post('products/add',[Admin\ProductController::class,'postAdd']);
-    Route::post('products/import',[Admin\ProductController::class,'post_import']);
+    
+    
+    
     Route::get('products/delete/{id}',[Admin\ProductController::class,'delete']);
     Route::get('products/edit/{id}',[Admin\ProductController::class,'edit']);
     Route::post('products/edit/{id}',[Admin\ProductController::class,'postEdit']);
@@ -80,51 +140,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','set_lang']],function(){
     Route::get('shops/edit/{id}',[Admin\ShopController::class,'edit']);
     Route::post('shops/edit/{id}',[Admin\ShopController::class,'postEdit']);
 
-    //purchases
-    Route::get('purchases',[Admin\PurchaseController::class,'index']);
-    Route::get('view-pdf/{id}',[Admin\PurchaseController::class,'view_pdf']);
-    Route::get('purchases/view/{id}',[Admin\PurchaseController::class,'show']);
-    Route::get('purchases/search',[Admin\PurchaseController::class,'search']);
-    Route::get('purchases/add',[Admin\PurchaseController::class,'add']);
-    Route::get('purchases/delete/{id}',[Admin\PurchaseController::class,'delete']);
-    Route::post('purchases/add',[Admin\PurchaseController::class,'postAdd']);
-    Route::post('send/email/{id}',[Admin\PurchaseController::class,'send_email']);
     
-
-    //recive purchase
-    Route::get('recives',[Admin\ReciveController::class,'index']);
-    Route::get('recives/view/{id}',[Admin\ReciveController::class,'show']);
-    Route::get('recives/add',[Admin\ReciveController::class,'add']);
-    Route::post('recives/add',[Admin\ReciveController::class,'postAdd']);
-    Route::get('recives/edit/{id}',[Admin\ReciveController::class,'edit']);
-    Route::post('recives/edit/{id}',[Admin\ReciveController::class,'postEdit']);
-    Route::get('purchases/recive/{id}',[Admin\ReciveController::class,'recive']);
-    Route::post('purchases/recive/{id}',[Admin\ReciveController::class,'postRecive']);
-
-    //stock-movements 
-    Route::get('stock-movements/move',[Admin\StockMovementController::class,'move']);
-    Route::get('stock-movements',[Admin\StockMovementController::class,'index']);
-    Route::get('stock/search',[Admin\StockController::class,'search']);
-    Route::get('stocks',[Admin\StockController::class,'index']);
-    Route::get('stocks/view/{id}',[Admin\StockController::class,'view']);
-    Route::post('stock/move',[Admin\StockController::class,'postMove']);
-    Route::get('stock-movements/view/{id}',[Admin\StockMovementController::class,'show']);
-
-    //shop-movements 
-    Route::get('shop-movements/add',[Admin\ShopMovementController::class,'move']);
-    Route::post('shop-movements/add',[Admin\ShopMovementController::class,'postAdd']);
-    Route::get('shop-movements',[Admin\ShopMovementController::class,'index']);
-    Route::get('shop-movements/view/{id}',[Admin\ShopMovementController::class,'show']);
-    Route::get('shop-movements/edit/{id}',[Admin\ShopMovementController::class,'edit']);
-    Route::post('shop-movements/edit/{id}',[Admin\ShopMovementController::class,'postEdit']);
     
-    //recive purchase
-    Route::get('sales-bills',[Admin\SalesBillController::class,'index']);
-    Route::get('sales-bills/view/{id}',[Admin\SalesBillController::class,'show']);
-    Route::get('sales-bills/add',[Admin\SalesBillController::class,'add']);
-    Route::post('sales-bills/add',[Admin\SalesBillController::class,'postAdd']);
-    Route::get('sales-bills/edit/{id}',[Admin\SalesBillController::class,'edit']);
-    Route::post('sales-bills/edit/{id}',[Admin\SalesBillController::class,'postEdit']);
+    
     
     //inventories
     Route::get('inventories',[Admin\InventoryController::class,'index']);

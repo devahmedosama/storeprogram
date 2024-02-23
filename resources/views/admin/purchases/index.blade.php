@@ -15,7 +15,10 @@
 	<div class="card">
 		<div class="card-body">
 			<div class="table-responsive">
-				<a href="{{ URL::to('admin/purchases/add') }}" class="btn-xs btn btn-primary pull-right">{{ trans('home.Add New') }}</a>
+				@if(auth()->user()->type == 0)
+					<a href="{{ URL::to('admin/purchases/add') }}" class="btn-xs btn btn-primary pull-right">
+						{{ trans('home.Add New') }}</a>
+				@endif
 			    <table class="table">
 			        <thead>
 			            <tr>
@@ -56,7 +59,7 @@
 								
 			                	<a href="{{ URL::to('admin/purchases/recive/'.$data->id) }}" 
 								class="btn btn-primary btn-xs"> {{  trans('home.Recive & update') }}</a>
-			                	@if(empty($data->recive))
+			                	@if(empty($data->recive) && auth()->user()->type == 0)
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#exampleModal{{ $data->id }}">
 								   Delete

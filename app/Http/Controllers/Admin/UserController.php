@@ -97,4 +97,12 @@ class UserController extends Controller
     	return back()
     			->with('yes','Done Successfully');
     }
+    public function activate($id)  {
+        $data  =  User::find($id);
+        $data->active =  $data->active==1?0:1;
+        $data->save();
+        return [
+            'state'=>$data->active
+        ];
+    }
 }

@@ -20,18 +20,22 @@
 					      <a data-toggle="modal" data-target="#product_import_form"
 							 class=" btn btn-xs btn-primary">{{ trans('home.Xsl') }}</a>
 					</div>
+					@if(auth()->user()->type == 0)
 				    <div class="form-group col-md-6 ">
 			            <label for="inputEmail4">{{ trans('home.Store From') }}</label>
 			            {{ Form::select('store_id',$stores,null,['class'=>'form-control','id'=>'store_id'
 							]) }}
 			        </div>
+					@else
+					    <input type="hidden" name="store_id" value="{{ auth()->user()->store_id }}">
+					@endif
 					<div class="form-group col-md-6 plus_div">
 			            <label for="inputEmail4">{{ trans('home.Sales Man') }}</label>
 			            {{ Form::select('sales_man_id',$items,null,['class'=>'form-control','required'
 							,'id'=>'sales_man_id']) }}
 							<a data-toggle="modal" data-target="#sales_man_form" class="plus_btn btn bt-xs btn-primary">+</a>	
 			        </div>
-				    <div class="form-group col-md-12 ">
+				    <div class="form-group {{ auth()->user()->type==0?'col-md-12':'col-md-6' }} ">
 			            <label for="inputEmail4">{{ trans('home.Product') }}</label>
 			            {{ Form::text('product',null,['class'=>'form-control'
 							,'id'=>'product_search']) }}

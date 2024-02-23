@@ -65,7 +65,14 @@ class SalesBillController extends Controller
                    ->with('yes',trans('home.Done Successfully'));
 	}
     public function index() {
-        $allData =  SalesBill::OrderBy('id','desc')->paginate(30);
+        $allData =  SalesBill::OrderBy('id','desc')->where(function($q){
+            if (auth()->user()->store_id) {
+                $q->where('store_id',auth()->user()->store_id);
+            }
+            if (auth()->user()->shop_id) {
+                $q->where('shop_id',auth()->user()->shop_id);
+            }
+        })->paginate(30);
         return view('admin.bills.index')
                     ->with('allData',$allData)
                     ->with('title',trans('home.Sales Bills'));

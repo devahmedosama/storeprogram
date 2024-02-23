@@ -46,7 +46,7 @@
                                         <input type="hidden" name="product_id[]" value="{{ $item->product_id }}">
                                     </td>
                                     <td>
-                                        {{ Form::number('quantity[]',$item->amount,['class'=>'form-control','min'=>0,'max'=>$item->max]) }}
+                                        {{ Form::number('quantity[]',$item->amount,['class'=>'form-control','min'=>0]) }}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -67,7 +67,7 @@
 	   <script>
 		   var  ids =  [];
            @foreach($data->items as $item)
-                  ids.push({{ $item->product_id }});
+                //   ids.push({{ $item->product_id }});
            @endforeach
 		   $('#store_id').change(function(){
 			  ids =  [];
@@ -91,14 +91,14 @@
 			  var  id   =  $(this).data('id');
 			  var  max   =  $(this).data('max');
 			  if (!ids.includes(id)) {
-				ids.push(id);
+				// ids.push(id);
 				var  name =  $(this).data('name');
 				var  id   =  $(this).data('id');
 				var  code =  $(this).data('code');
 				var  text =  '<tr>';
 				text      = text+'<td>'+code+'</td>';
 				text      = text+'<td> <input type="hidden" name="product_id[]" value="'+id+'" >'+name+'</td>' ;
-				text      = text+'<td><input type="number" class="form-control" max="'+max+'" min="1" name="quantity[]" value="1" ></td>' ;
+				text      = text+'<td><input type="number" class="form-control"  min="1" name="quantity[]" value="1" ></td>' ;
 				text      = text+'<td> <a class="remove_item"> X </a> </td></tr>' ;
 				$('#products_row').append(text);
 				$('.product_list').html('');

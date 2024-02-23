@@ -27,7 +27,23 @@
 							<ul class="purchase_list">
 							</ul>
 			        </div>
-				    <div class="form-group col-md-6 plus_div list_holder">
+					<div class="form-group col-md-6 plus_div">
+			            <label for="inputEmail4">{{ trans('home.Supplier') }}</label>
+			            {{ Form::select('suplier_id',$supliers,null,['class'=>'form-control','required'
+							,'id'=>'suplier_id']) }}
+							<a data-toggle="modal" data-target="#supplier_form" class="plus_btn btn bt-xs btn-primary">+</a>	
+			        </div>
+					@if(auth()->user()->type == 0)
+						<div class="form-group col-md-6 plus_div">
+							<label for="inputEmail4">{{ trans('home.Store') }}</label>
+							{{ Form::select('store_id',$stores,null,['class'=>'form-control','required'
+								,'id'=>'store_id']) }}
+								<a data-toggle="modal" data-target="#store_form" class="plus_btn btn bt-xs btn-primary">+</a>	
+						</div>
+					@else
+					    <input type="hidden" name="store_id" value="{{ auth()->user()->store_id }}">
+					@endif
+				    <div class="form-group {{ auth()->user()->type==0?'col-md-6':'col-md-12' }} plus_div list_holder">
 			            <label for="inputEmail4">{{ trans('home.Product') }}</label>
 			            {{ Form::text('product',null,['class'=>'form-control'
 							,'id'=>'product_search']) }}
@@ -36,18 +52,7 @@
 							<ul class="product_list">
 							</ul>
 			        </div>
-                    <div class="form-group col-md-6 plus_div">
-			            <label for="inputEmail4">{{ trans('home.Supplier') }}</label>
-			            {{ Form::select('suplier_id',$supliers,null,['class'=>'form-control','required'
-							,'id'=>'suplier_id']) }}
-							<a data-toggle="modal" data-target="#supplier_form" class="plus_btn btn bt-xs btn-primary">+</a>	
-			        </div>
-				    <div class="form-group col-md-6 plus_div">
-			            <label for="inputEmail4">{{ trans('home.Store') }}</label>
-			            {{ Form::select('store_id',$stores,null,['class'=>'form-control','required'
-							,'id'=>'store_id']) }}
-							<a data-toggle="modal" data-target="#store_form" class="plus_btn btn bt-xs btn-primary">+</a>	
-			        </div>
+                   
                     <input type="hidden" name="purchase_id" id="purchase_id">
 					<div class="col-md-12">
 						<table class="table">

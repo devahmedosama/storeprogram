@@ -102,7 +102,7 @@ return [
     'Users'=>'Users',
     'Activate'=>'Activate',
     'Choose User Type'=>'Choose User Type',
-    ''=>'',
+    'Stop'=>'Stop',
     ''=>'',
     ''=>'',
     ''=>'',
