@@ -77,6 +77,21 @@ class SalesBillController extends Controller
                     ->with('allData',$allData)
                     ->with('title',trans('home.Sales Bills'));
     }
+    public function my_bills()  {
+        $allData =  SalesBill::OrderBy('id','desc')
+                        ->where('sales_man_id',auth()->user()->sales_man_id)
+                        ->where(function($q){
+                            if (auth()->user()->store_id) {
+                                $q->where('store_id',auth()->user()->store_id);
+                            }
+                            if (auth()->user()->shop_id) {
+                                $q->where('shop_id',auth()->user()->shop_id);
+                            }
+                        })->paginate(30);
+        return view('admin.sales_men.index')
+                    ->with('allData',$allData)
+                    ->with('title',trans('home.Sales Bills'));
+    }
     public function show($id)  {
         $data =  SalesBill::find($id);
         $data->amount = $data->items()->sum('amount');

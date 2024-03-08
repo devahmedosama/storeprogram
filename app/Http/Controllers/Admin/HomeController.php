@@ -30,7 +30,14 @@ class HomeController extends Controller
     }
     public function index($value='')
     {
-        return view('admin.index');
+        $asks =  \App\Models\AskBill::where('state',0)
+                        ->where(function($q){
+                            if (auth()->user()->store_id) {
+                                $q->where('store_id',auth()->user()->store_id);
+                            }
+                        })->count();
+        return view('admin.index')
+                ->with('asks',$asks);
     }
     public function contacts()
     {

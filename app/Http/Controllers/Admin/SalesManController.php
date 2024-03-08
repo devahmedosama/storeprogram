@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SalesMan;
+use App\Models\User;
 use Validator;
 
 class SalesManController extends Controller
@@ -43,6 +44,15 @@ class SalesManController extends Controller
 			$data->phone     =  $request->phone;
 			$data->email     =  $request->email;
 			$data->save();
+			if ($request->username) {
+				$user =  new User;
+				$user->username =  $request->username;
+				$user->password =  \Hash::make($request->password);
+				$user->type     =  3;
+				$user->sales_man_id = $data->id;
+				$user->save();
+
+			}
 			if ($request->ajax()) {
 				return [
 					'state'=>1,

@@ -29,8 +29,19 @@
 			            {{ Form::select('shop_id',$shops,$data->shop_id,['class'=>'form-control','placeholder'=>trans('home.Choose Shop')]) }}
 			        </div>
 			    </div>
-			    
 			    <div class="form-row">
+				    <div class="col-md-12">
+						<ul class="permissions_ul">
+							@foreach($permissions as $per)
+								<li>
+									<input type="checkbox" name="permission_id[]"
+									 value="{{ $per->id }}" {{ $per->checked==1?'checked':'' }}>
+									{{ $per->name }}
+								</li>
+						    @endforeach
+						</ul>
+					    
+					</div>
 			        <div class="form-group col-md-6">
 			            <label for="inputEmail4">{{ trans('home.Password') }}</label>
 			            {{ Form::password('password',['class'=>'form-control']) }}

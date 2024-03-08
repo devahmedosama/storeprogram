@@ -34,8 +34,12 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     {{ Form::text('phone',null,['class'=>'form-control']) }}
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="inputEmail4">{{ trans('home.E-mail') }}</label>
-                                    {{ Form::email('email',null,['class'=>'form-control']) }}
+                                    <label for="inputEmail4">{{ trans('home.Username') }}</label>
+                                    {{ Form::text('username',null,['class'=>'form-control','required']) }}
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail4">{{ trans('home.Password') }}</label>
+                                    {{ Form::password('password',['class'=>'form-control','required']) }}
                                 </div>
                             </div>
                     <button type="submit" class="btn btn-primary">{{ trans('home.Save') }}</button>

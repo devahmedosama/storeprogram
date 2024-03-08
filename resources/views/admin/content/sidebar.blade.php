@@ -46,6 +46,14 @@
             @endif
             @if(auth()->user()->type < 2)
             <li class="nav-item ">
+                    <a  href="{{ URL::to('admin/ask-store') }}">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-dashboard"></i>
+                        </span>
+                        <span class="title">{{ trans('home.Ask Bills') }} </span>
+                    </a>
+            </li>
+            <li class="nav-item ">
                 <a  href="{{ URL::to('admin/purchases') }}">
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
@@ -127,6 +135,7 @@
                         <span class="title">{{ trans('home.Settings') }} </span>
                     </a>
                 </li>
+                
             @endif
             @if(auth()->user()->type == 2)
             <li class="nav-item ">
@@ -137,6 +146,24 @@
                     <span class="title">{{ trans('home.Recives') }} </span>
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->type == 3)
+            <li class="nav-item ">
+                <a  href="{{ URL::to('admin/my-bills') }}">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-dashboard"></i>
+                    </span>
+                    <span class="title">{{ trans('home.Recives') }} </span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                    <a  href="{{ URL::to('admin/ask-bills') }}">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-dashboard"></i>
+                        </span>
+                        <span class="title">{{ trans('home.Ask Bills') }} </span>
+                    </a>
+                </li>
             @endif
             <li class="nav-item ">
                 <a  href="{{ URL::to('admin/profile') }}">

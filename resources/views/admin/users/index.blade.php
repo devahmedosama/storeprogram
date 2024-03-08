@@ -57,12 +57,12 @@
 			                <td>
 			                	@if($data->type >  0)
 			                	   @if($data->active == 0)
-			                			<a  class="btn btn-primary btn-md activate_user stop"  data-id="{{ $data->id }}">{{ trans('home.Activate') }}</a>
+			                			<a  class="btn btn-primary btn-xs activate_user stop"  data-id="{{ $data->id }}">{{ trans('home.Activate') }}</a>
 			                	   @else
-			                	        <a  class="btn btn-primary btn-md activate_user active"  data-id="{{ $data->id }}">{{ trans('home.Stop') }}</a>
+			                	        <a  class="btn btn-primary btn-xs activate_user active"  data-id="{{ $data->id }}">{{ trans('home.Stop') }}</a>
 			                	   @endif
 			                	@endif
-			                	<a href="{{ URL::to('admin/users/edit/'.$data->id) }}" class="btn btn-primary btn-md">{{ trans('home.Edit') }}</a>								
+			                	<a href="{{ URL::to('admin/users/edit/'.$data->id) }}" class="btn btn-primary btn-xs">{{ trans('home.Edit') }}</a>								
 			                </td>
 			            </tr>
 			           @endforeach

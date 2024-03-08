@@ -56,7 +56,10 @@
 							
 							</td>
 			                <td>
-								
+								<a href="{{ URL::to('admin/view-pdf/'.$data->id) }}" 
+								class="btn btn-xs btn-success" target="_blank">
+									<i class="anticon anticon-eye"></i>
+								</a>
 			                	<a href="{{ URL::to('admin/purchases/recive/'.$data->id) }}" 
 								class="btn btn-primary btn-xs"> {{  trans('home.Recive & update') }}</a>
 			                	@if(empty($data->recive) && auth()->user()->type == 0)

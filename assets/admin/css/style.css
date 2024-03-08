@@ -417,3 +417,22 @@ span.btn_loader{
   .btn-primary{
 	margin: 5px;
   }
+  .number_span{
+	position: absolute;
+    left: 0;
+    color: red;
+    font-size: 22px;
+    background: #fff;
+  }
+  .home-ul li {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+  }
+  .permissions_ul{
+	padding: 0;
+  }
+  .permissions_ul li{
+	display: inline-block;
+	margin: 15px;;
+  }

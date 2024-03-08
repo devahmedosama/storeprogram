@@ -72,10 +72,38 @@ Route::group(['prefix'=>'admin','middleware'=>['set_lang','store_keeper']],funct
    Route::post('supliers/add',[Admin\SuplierController::class,'postAdd']);
    Route::post('products/add',[Admin\ProductController::class,'postAdd']);
    Route::post('sales-men/add',[Admin\SalesManController::class,'postAdd']);
+
+   //ask bills
+   Route::get('ask-store',[Admin\AskBillController::class,'ask_store']);
+   Route::get('ask-store/view/{id}',[Admin\AskBillController::class,'show']);
+   Route::get('ask-store/edit/{id}',[Admin\AskBillController::class,'update']);
+   Route::post('ask-store/edit/{id}',[Admin\AskBillController::class,'postUpdate']);
+});
+Route::group(['prefix'=>'admin','middleware'=>['set_lang','sales_man']],function(){
+
+     Route::get('my-bills',[Admin\SalesBillController::class,'my_bills']);
+     Route::get('bills/view/{id}',[Admin\SalesBillController::class,'show']);
+
+     //ask bills
+     Route::get('ask-bills',[Admin\AskBillController::class,'index']);
+     Route::get('ask-bills/view/{id}',[Admin\AskBillController::class,'show']);
+     Route::get('ask-bills/add',[Admin\AskBillController::class,'add']);
+     Route::post('ask-bills/add',[Admin\AskBillController::class,'postAdd']);
+     Route::get('ask-bills/edit/{id}',[Admin\AskBillController::class,'edit']);
+     Route::post('ask-bills/edit/{id}',[Admin\AskBillController::class,'postEdit']);
+     
 });
 Route::group(['prefix'=>'admin','middleware'=>['admin','set_lang']],function(){
 
-  
+   //permissions
+   Route::get('permissions',[Admin\PermissionController::class,'index']);
+   Route::get('permissions/add',[Admin\PermissionController::class,'add']);
+   Route::post('permissions/add',[Admin\PermissionController::class,'postAdd']);
+   Route::get('permissions/delete/{id}',[Admin\PermissionController::class,'delete']);
+   Route::get('permissions/edit/{id}',[Admin\PermissionController::class,'edit']);
+   Route::post('permissions/edit/{id}',[Admin\PermissionController::class,'postEdit']);
+
+   //settings
    Route::get('settings',[Admin\SettingController::class,'index']);
    Route::post('settings',[Admin\SettingController::class,'edit']);
 
